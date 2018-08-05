@@ -5,21 +5,21 @@ EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 1
-Title ""
+Title "2 Channel Remote Switch"
 Date ""
-Rev ""
+Rev "0.1"
 Comp ""
-Comment1 ""
-Comment2 ""
-Comment3 ""
-Comment4 ""
+Comment1 "for software control."
+Comment2 "Default LED configuration is always off, bridge to GND for always on, or bridgt to SW_LEDn "
+Comment3 "Accepts inputs from 2 LED arcade buttons and standard light switch"
+Comment4 "Acts as receiver or transmitter for remote switching of AC Mains voltage up to 10 amps"
 $EndDescr
 $Comp
 L remoteSwitch_custom:TSP-03 U2
 U 1 1 5B5E5DB0
 P 2200 1300
-F 0 "U2" H 2200 1697 60  0000 C CNN
-F 1 "TSP-03" H 2200 1591 60  0000 C CNN
+F 0 "U2" H 2200 1300 60  0000 C CNN
+F 1 "TSP-03" H 2200 1550 60  0000 C CNN
 F 2 "Connectors_JST:JST_SH_BM04B-SRSS-TB_04x1.00mm_Straight" H 2200 1300 60  0001 C CNN
 F 3 "" H 2200 1300 60  0000 C CNN
 	1    2200 1300
@@ -30,7 +30,7 @@ L Connector:Screw_Terminal_01x02 J1
 U 1 1 5B5E5E9C
 P 850 1350
 F 0 "J1" H 770 1025 50  0000 C CNN
-F 1 "Conn_01x02" H 800 1100 50  0000 C CNN
+F 1 "Conn_AC_MAINS" H 800 1100 50  0000 C CNN
 F 2 "Connectors:PINHEAD1-2" H 850 1350 50  0001 C CNN
 F 3 "~" H 850 1350 50  0001 C CNN
 	1    850  1350
@@ -180,7 +180,7 @@ U 1 1 5B5E6E78
 P 9450 1700
 F 0 "K1" V 9950 1650 50  0000 L CNN
 F 1 "SRD-03VDC-SL-C" V 10050 1400 50  0000 L CNN
-F 2 "Relay_THT:Relay_SPDT_Finder_40.11" H 10590 1660 50  0001 C CNN
+F 2 "Relays_THT:Relay_SPDT_SANYOU_SRD_Series_Form_C" H 10590 1660 50  0001 C CNN
 F 3 "https://www.finder-relais.net/de/finder-relais-serie-40.pdf" H 9450 1700 50  0001 C CNN
 	1    9450 1700
 	1    0    0    -1  
@@ -189,9 +189,9 @@ $Comp
 L MCU_Microchip_ATmega:ATmega328PB-AU U3
 U 1 1 5B5E6ED7
 P 5000 3350
-F 0 "U3" V 5200 1850 50  0000 R CNN
-F 1 "ATmega328PB-AU" V 4700 1850 50  0000 R CNN
-F 2 "SMD_Packages:SOJ-32" H 5000 3350 50  0001 C CIN
+F 0 "U3" H 5000 3400 50  0000 R CNN
+F 1 "ATmega328PB-AU" H 5750 1900 50  0000 R CNN
+F 2 "Housings_DFN_QFN:QFN-32-1EP_4x4mm_Pitch0.4mm" H 5000 3350 50  0001 C CIN
 F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/40001906C.pdf" H 5000 3350 50  0001 C CNN
 	1    5000 3350
 	1    0    0    -1  
@@ -415,11 +415,7 @@ $EndComp
 Wire Wire Line
 	5600 3050 5850 3050
 Wire Wire Line
-	4400 4150 4100 4150
-Wire Wire Line
 	5600 3150 5850 3150
-Wire Wire Line
-	4400 4050 4100 4050
 Wire Wire Line
 	5600 2550 5850 2550
 Wire Wire Line
@@ -428,8 +424,6 @@ Wire Wire Line
 	5600 2650 5850 2650
 Wire Wire Line
 	6300 3650 5600 3650
-Wire Wire Line
-	6300 3650 6500 3650
 Connection ~ 6300 3650
 $Comp
 L power:+3.3V #PWR0114
@@ -469,9 +463,9 @@ $Comp
 L remoteSwitch_custom:NRF24L01+ U1
 U 1 1 5B61853C
 P 2300 6300
-F 0 "U1" H 2100 6800 50  0000 C CNN
-F 1 "NRF24L01+" H 1950 6700 50  0000 C CNN
-F 2 "RF_Modules:nRF24L01_Breakout" H 2300 6300 50  0001 C CNN
+F 0 "U1" H 2300 6350 50  0000 C CNN
+F 1 "NRF24L01+" H 2550 5900 50  0000 C CNN
+F 2 "remoteSwitch_footprints:NRF24L01_SMD" H 2300 6300 50  0001 C CNN
 F 3 "" H 2300 6300 50  0001 C CNN
 	1    2300 6300
 	1    0    0    -1  
@@ -502,8 +496,8 @@ $Comp
 L Device:C C1
 U 1 1 5B618BCE
 P 2000 5450
-F 0 "C1" H 2115 5496 50  0000 L CNN
-F 1 "0.1uF" H 2115 5405 50  0000 L CNN
+F 0 "C1" H 1750 5500 50  0000 L CNN
+F 1 "0.1uF" H 1650 5400 50  0000 L CNN
 F 2 "Capacitors_SMD:C_1210_HandSoldering" H 2038 5300 50  0001 C CNN
 F 3 "~" H 2000 5450 50  0001 C CNN
 	1    2000 5450
@@ -557,15 +551,9 @@ Wire Wire Line
 Wire Wire Line
 	8600 2100 8600 1850
 Wire Wire Line
-	5600 4550 5850 4550
-Wire Wire Line
-	5600 4450 5850 4450
-Wire Wire Line
 	1600 6200 1850 6200
 Wire Wire Line
 	1600 6300 1850 6300
-Wire Wire Line
-	4400 3950 4100 3950
 $Comp
 L Connector:Screw_Terminal_01x02 J3
 U 1 1 5B635EAD
@@ -600,16 +588,10 @@ Relays
 Text Notes 5850 7600 2    157  ~ 0
 Controller
 Wire Wire Line
-	5850 3850 5600 3850
-Wire Wire Line
-	5600 3950 5850 3950
-Wire Wire Line
 	5850 4050 5600 4050
 NoConn ~ 4400 2150
-NoConn ~ 5600 2150
 NoConn ~ 5600 2750
 NoConn ~ 5600 2850
-NoConn ~ 5600 3250
 NoConn ~ 5600 3350
 NoConn ~ 5600 3450
 NoConn ~ 5600 3550
@@ -618,26 +600,26 @@ NoConn ~ 5600 4350
 NoConn ~ 4400 3850
 NoConn ~ 9550 1400
 Text Label 5900 4450 2    50   ~ 0
-Relay1
+RELAY1
 Text Label 5900 4550 2    50   ~ 0
-Relay2
-Text Label 1650 6200 2    50   ~ 0
-CE
-Text Label 1650 6300 2    50   ~ 0
+RELAY2
+Text Label 1600 6200 0    50   ~ 0
+CE1
+Text Label 1600 6300 0    50   ~ 0
 SS1
-Text Label 3100 6200 2    50   ~ 0
+Text Label 3000 6200 2    50   ~ 0
 SCK1
-Text Label 3100 6300 2    50   ~ 0
+Text Label 3000 6300 2    50   ~ 0
 MOSI1
-Text Label 3100 6400 2    50   ~ 0
+Text Label 3000 6400 2    50   ~ 0
 MISO1
-Text Label 5600 6150 2    50   ~ 0
+Text Label 5400 6150 2    50   ~ 0
 MOSI0
-Text Label 4450 6050 2    50   ~ 0
+Text Label 4450 6050 0    50   ~ 0
 MISO0
-Text Label 4450 6150 2    50   ~ 0
+Text Label 4450 6150 0    50   ~ 0
 SCK0
-Text Label 4450 6250 2    50   ~ 0
+Text Label 4450 6250 0    50   ~ 0
 RESET
 Text Label 2600 4400 2    50   ~ 0
 SW3
@@ -645,9 +627,7 @@ Text Label 2600 3800 2    50   ~ 0
 SW2
 Text Label 2600 2950 2    50   ~ 0
 SW1
-Text Label 5850 3850 2    50   ~ 0
-SW1
-Text Label 5850 3950 2    50   ~ 0
+Text Label 5850 3250 2    50   ~ 0
 SW2
 Text Label 5850 4050 2    50   ~ 0
 SW3
@@ -657,11 +637,11 @@ Text Label 5850 3050 2    50   ~ 0
 MISO1
 Text Label 5850 3150 2    50   ~ 0
 SCK1
-Text Label 4200 3950 2    50   ~ 0
+Text Label 4150 3950 0    50   ~ 0
 CE1
-Text Label 4200 4050 2    50   ~ 0
+Text Label 4150 4050 0    50   ~ 0
 SS1
-Text Label 4300 4150 2    50   ~ 0
+Text Label 4150 4150 0    50   ~ 0
 MOSI1
 Text Label 5850 2450 2    50   ~ 0
 MOSI0
@@ -675,7 +655,7 @@ U 1 1 5B6A25F9
 P 8150 2300
 F 0 "Q1" H 8355 2346 50  0000 L CNN
 F 1 "BSS138" H 8355 2255 50  0000 L CNN
-F 2 "" H 8350 2400 50  0001 C CNN
+F 2 "TO_SOT_Packages_SMD:SOT-23" H 8350 2400 50  0001 C CNN
 F 3 "~" H 8150 2300 50  0001 C CNN
 	1    8150 2300
 	1    0    0    -1  
@@ -708,9 +688,7 @@ Wire Notes Line
 	3850 4950 500  4950
 Wire Notes Line
 	6950 6500 6950 500 
-Wire Wire Line
-	7950 2300 7600 2300
-Text Label 7700 2300 2    50   ~ 0
+Text Label 7650 2300 0    50   ~ 0
 RELAY2
 Wire Wire Line
 	8600 2100 8250 2100
@@ -721,7 +699,7 @@ U 1 1 5B6CF688
 P 7950 2500
 F 0 "R4" H 8018 2546 50  0000 L CNN
 F 1 "4.7k" H 8018 2455 50  0000 L CNN
-F 2 "" V 7990 2490 50  0001 C CNN
+F 2 "Resistors_SMD:R_0805_HandSoldering" V 7990 2490 50  0001 C CNN
 F 3 "~" H 7950 2500 50  0001 C CNN
 	1    7950 2500
 	1    0    0    -1  
@@ -737,14 +715,13 @@ Wire Wire Line
 Connection ~ 8250 2700
 Wire Wire Line
 	7950 2350 7950 2300
-Connection ~ 7950 2300
 $Comp
 L Device:R_US R6
 U 1 1 5B6D7D19
 P 8250 1500
 F 0 "R6" H 8318 1546 50  0000 L CNN
 F 1 "470" H 8318 1455 50  0000 L CNN
-F 2 "" V 8290 1490 50  0001 C CNN
+F 2 "Resistors_SMD:R_0805_HandSoldering" V 8290 1490 50  0001 C CNN
 F 3 "~" H 8250 1500 50  0001 C CNN
 	1    8250 1500
 	1    0    0    -1  
@@ -773,7 +750,7 @@ U 1 1 5B6EFC7D
 P 9450 4200
 F 0 "K2" V 9950 4200 50  0000 L CNN
 F 1 "SRD-03VDC-SL-C" V 10050 3900 50  0000 L CNN
-F 2 "Relay_THT:Relay_SPDT_Finder_40.11" H 10590 4160 50  0001 C CNN
+F 2 "Relays_THT:Relay_SPDT_SANYOU_SRD_Series_Form_C" H 10590 4160 50  0001 C CNN
 F 3 "https://www.finder-relais.net/de/finder-relais-serie-40.pdf" H 9450 4200 50  0001 C CNN
 	1    9450 4200
 	1    0    0    -1  
@@ -843,7 +820,7 @@ U 1 1 5B6EFCA6
 P 8150 4800
 F 0 "Q2" H 8355 4846 50  0000 L CNN
 F 1 "BSS138" H 8355 4755 50  0000 L CNN
-F 2 "" H 8350 4900 50  0001 C CNN
+F 2 "TO_SOT_Packages_SMD:SOT-23" H 8350 4900 50  0001 C CNN
 F 3 "~" H 8150 4800 50  0001 C CNN
 	1    8150 4800
 	1    0    0    -1  
@@ -859,9 +836,7 @@ F 3 "" H 8250 5250 50  0001 C CNN
 	1    8250 5250
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	7950 4800 7600 4800
-Text Label 7700 4800 2    50   ~ 0
+Text Label 7650 4800 0    50   ~ 0
 RELAY1
 Wire Wire Line
 	8600 4600 8250 4600
@@ -872,7 +847,7 @@ U 1 1 5B6EFCB7
 P 7950 5000
 F 0 "R5" H 8018 5046 50  0000 L CNN
 F 1 "4.7k" H 8018 4955 50  0000 L CNN
-F 2 "" V 7990 4990 50  0001 C CNN
+F 2 "Resistors_SMD:R_0805_HandSoldering" V 7990 4990 50  0001 C CNN
 F 3 "~" H 7950 5000 50  0001 C CNN
 	1    7950 5000
 	1    0    0    -1  
@@ -888,14 +863,13 @@ Wire Wire Line
 Connection ~ 8250 5200
 Wire Wire Line
 	7950 4850 7950 4800
-Connection ~ 7950 4800
 $Comp
 L Device:R_US R7
 U 1 1 5B6EFCC5
 P 8250 4000
 F 0 "R7" H 8318 4046 50  0000 L CNN
 F 1 "470" H 8318 3955 50  0000 L CNN
-F 2 "" V 8290 3990 50  0001 C CNN
+F 2 "Resistors_SMD:R_0805_HandSoldering" V 8290 3990 50  0001 C CNN
 F 3 "~" H 8250 4000 50  0001 C CNN
 	1    8250 4000
 	1    0    0    -1  
@@ -919,65 +893,91 @@ Wire Wire Line
 	8250 4500 8250 4600
 Connection ~ 8250 4600
 $Comp
-L power:+3.3V #PWR?
+L power:+3.3V #PWR0113
 U 1 1 5B702A3F
 P 6300 3350
-F 0 "#PWR?" H 6300 3200 50  0001 C CNN
+F 0 "#PWR0113" H 6300 3200 50  0001 C CNN
 F 1 "+3.3V" H 6315 3523 50  0000 C CNN
 F 2 "" H 6300 3350 50  0001 C CNN
 F 3 "" H 6300 3350 50  0001 C CNN
 	1    6300 3350
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	5600 2250 5850 2250
-Wire Wire Line
-	5600 2350 5850 2350
 NoConn ~ 5600 4150
 Text Label 5950 2250 2    50   ~ 0
 LED_SW1
 Text Label 5950 2350 2    50   ~ 0
 LED_SW2
-$Comp
-L Jumper:SolderJumper_3_Bridged12 JP?
-U 1 1 5B718587
-P 1650 3050
-F 0 "JP?" V 1696 3118 50  0000 L CNN
-F 1 "LED_SW1 JPR" V 1605 3118 50  0000 L CNN
-F 2 "" H 1650 3050 50  0001 C CNN
-F 3 "~" H 1650 3050 50  0001 C CNN
-	1    1650 3050
-	0    -1   -1   0   
-$EndComp
 Wire Wire Line
 	2000 2950 2050 2950
 Wire Wire Line
 	2050 3050 1800 3050
 Wire Wire Line
 	1650 3250 1650 3300
-Wire Wire Line
-	1650 2850 1350 2850
-Text Label 1400 2850 2    50   ~ 0
+Text Label 1400 2850 0    50   ~ 0
 LED_SW1
 Wire Wire Line
 	2050 3800 2000 3800
+Wire Wire Line
+	2050 3900 1800 3900
+Wire Wire Line
+	1650 4100 1650 4150
+Text Label 1400 3700 0    50   ~ 0
+LED_SW2
 $Comp
-L Jumper:SolderJumper_3_Bridged12 JP?
-U 1 1 5B7349E8
+L Jumper:SolderJumper_3_Open JP2
+U 1 1 5B74373A
 P 1650 3900
-F 0 "JP?" V 1696 3968 50  0000 L CNN
-F 1 "LED_SW1 JPR" V 1605 3968 50  0000 L CNN
+F 0 "JP2" V 1696 3968 50  0000 L CNN
+F 1 "SolderJumper_3_Open" V 1605 3968 50  0000 L CNN
 F 2 "" H 1650 3900 50  0001 C CNN
 F 3 "~" H 1650 3900 50  0001 C CNN
 	1    1650 3900
 	0    -1   -1   0   
 $EndComp
+$Comp
+L Jumper:SolderJumper_3_Open JP1
+U 1 1 5B743823
+P 1650 3050
+F 0 "JP1" V 1696 3118 50  0000 L CNN
+F 1 "SolderJumper_3_Open" V 1605 3118 50  0000 L CNN
+F 2 "" H 1650 3050 50  0001 C CNN
+F 3 "~" H 1650 3050 50  0001 C CNN
+	1    1650 3050
+	0    -1   -1   0   
+$EndComp
 Wire Wire Line
-	2050 3900 1800 3900
+	5600 4450 5900 4450
 Wire Wire Line
-	1650 4100 1650 4150
+	5600 4550 5900 4550
 Wire Wire Line
-	1650 3700 1350 3700
-Text Label 1400 3700 2    50   ~ 0
-LED_SW2
+	5600 2250 5950 2250
+Wire Wire Line
+	5600 2350 5950 2350
+Wire Wire Line
+	6300 3650 6550 3650
+Wire Wire Line
+	4400 4150 4150 4150
+Wire Wire Line
+	4400 3950 4150 3950
+Wire Wire Line
+	4150 4050 4400 4050
+Wire Wire Line
+	1400 2850 1650 2850
+Wire Wire Line
+	1650 3700 1400 3700
+Connection ~ 7950 2300
+Wire Wire Line
+	7950 4800 7650 4800
+Connection ~ 7950 4800
+Wire Wire Line
+	7650 2300 7950 2300
+Wire Wire Line
+	5600 2150 5850 2150
+Text Label 5850 2150 2    50   ~ 0
+SW1
+Wire Wire Line
+	5600 3250 5850 3250
+NoConn ~ 5600 3850
+NoConn ~ 5600 3950
 $EndSCHEMATC
